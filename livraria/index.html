@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Troca de Livros</title>
+    <link rel="stylesheet" href="../style/style.css">
+</head>
+<body>
+    <header>
+        <h1>Plataforma de Troca de Livros</h1>
+        <nav>
+            <ul>
+                <li><a href="#cadastro-livro">Cadastrar Livro</a></li>
+                <li><a href="#listar-livros">Listar Livros</a></li>
+                <li><a href="#minhas-trocas">Minhas Trocas</a></li>
+                <li><a href="#minhas-resenhas">Minhas Resenhas</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="cadastro-livro">
+        <h2>Cadastrar Livro</h2>
+        <form id="form-cadastro-livro">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required>
+
+            <label for="autor">Autor:</label>
+            <input type="text" id="autor" name="autor" required>
+
+            <label for="edicao">Edição:</label>
+            <input type="number" id="edicao" name="edicao" required>
+
+            <label for="estado">Estado de Conservação:</label>
+            <select id="estado" name="estado" required>
+                <option value="EXCELENTE">Excelente</option>
+                <option value="BOM">Bom</option>
+                <option value="REGULAR">Regular</option>
+                <option value="RUIM">Ruim</option>
+                <option value="DANIFICADO">Danificado</option>
+            </select>
+
+            <button type="submit">Cadastrar Livro</button>
+        </form>
+    </section>
+
+    <section id="listar-livros">
+        <h2>Livros Disponíveis para Troca</h2>
+        <ul id="lista-livros">
+            <!-- Livros serão carregados aqui via JavaScript -->
+        </ul>
+    </section>
+
+    <section id="minhas-trocas">
+        <h2>Minhas Trocas</h2>
+        <ul id="lista-trocas">
+            <!-- Trocas serão carregadas aqui via JavaScript -->
+        </ul>
+    </section>
+
+    <section id="minhas-resenhas">
+        <h2>Minhas Resenhas</h2>
+        <ul id="lista-resenhas">
+            <!-- Resenhas serão carregadas aqui via JavaScript -->
+        </ul>
+    </section>
+
+    <footer>
+        
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
