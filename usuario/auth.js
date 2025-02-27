@@ -1,33 +1,41 @@
-// auth.js - Sistema de Autenticação Modular
+document.getElementById('form-registrar').addEventListener('submit', function(event) {
+    event.preventDefault(); // Previne o envio padrão do formulário
 
-// Simulação de "banco de dados" de usuários (apenas para front-end)
-let usuarios = [];
+    // Obtenção dos valores dos campos do formulário
+    const email = document.getElementById('email-registrar').value;
+    const user = document.getElementById('nome').value;
+    const password = document.getElementById('senha-registrar').value;
 
-// Função para registrar um novo usuário
-function registrarUsuario(nome, email, senha) {
-    // Verifica se o email já está cadastrado
-    const usuarioExistente = usuarios.find(u => u.email === email);
-
-    if (usuarioExistente) {
-        return { success: false, message: "Email já cadastrado." };
-    } else {
-        // Adiciona o novo usuário ao "banco de dados"
-        usuarios.push({ nome, email, senha });
-        return { success: true, message: "Usuário registrado com sucesso!" };
+    // Verificação para garantir que os campos não estão vazios
+    if (!email || !user || !password) {
+        alert('Por favor, preencha todos os campos.');
+        return;
     }
-}
 
-// Função para fazer login
-function fazerLogin(email, senha) {
-    // Verifica se o usuário existe no "banco de dados"
-    const usuario = usuarios.find(u => u.email === email && u.senha === senha);
+    // Objeto com os dados do novo usuário
+    const usuario = {
+        email: email,
+        user: user,
+        password: password
+    };
 
-    if (usuario) {
-        return { success: true, message: "Login bem-sucedido!", usuario };
-    } else {
-        return { success: false, message: "Email ou senha incorretos." };
-    }
-}
+    const url = 'http://localhost:8080/usuarios'; // URL do seu endpoint
 
-// Exporta as funções para uso em outros arquivos
-export { registrarUsuario, fazerLogin };
+    // Realizando a requisição POST
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(usuario) // Transforma o objeto em uma string JSON
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Usuário cadastrado com sucesso!');
+        console.log(data); // Exibe os dados retornados pela API
+    })
+    .catch(error => {
+        console.error('Erro ao cadastrar usuário:', error);
+        alert('Erro ao cadastrar usuário.');
+    });
+});
