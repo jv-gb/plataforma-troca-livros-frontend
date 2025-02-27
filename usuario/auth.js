@@ -13,11 +13,7 @@ document.getElementById('form-registrar').addEventListener('submit', function(ev
     }
 
     // Objeto com os dados do novo usuário
-    const usuario = {
-        email: email,
-        user: user,
-        password: password
-    };
+    const usuario = { email, user, password };
 
     const url = 'http://localhost:8080/usuarios'; // URL do seu endpoint
 
@@ -27,15 +23,23 @@ document.getElementById('form-registrar').addEventListener('submit', function(ev
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(usuario) // Transforma o objeto em uma string JSON
+        body: JSON.stringify(usuario) // Transforma o objeto em JSON
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            return response.text().then(errorMessage => {
+                throw new Error(errorMessage);
+            });
+        }
+        return response.json();
+    })
     .then(data => {
         alert('Usuário cadastrado com sucesso!');
-        console.log(data); // Exibe os dados retornados pela API
+        location.reload();
     })
     .catch(error => {
         console.error('Erro ao cadastrar usuário:', error);
-        alert('Erro ao cadastrar usuário.');
+        alert(`O usuário ou e-mail informado já está em uso`);
+        location.reload();
     });
 });
