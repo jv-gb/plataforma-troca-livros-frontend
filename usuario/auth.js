@@ -15,7 +15,7 @@ document.getElementById('form-registrar').addEventListener('submit', function(ev
     // Objeto com os dados do novo usuário
     const usuario = { email, user, password };
 
-    const url = 'http://localhost:8080/usuarios'; // URL do seu endpoint
+    const url = 'http://localhost:8080/usuarios/cadastrar'; // URL do seu endpoint
 
     // Realizando a requisição POST
     fetch(url, {
